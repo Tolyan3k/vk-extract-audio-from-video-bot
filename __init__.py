@@ -28,7 +28,7 @@ def captcha_handler(captcha):
     for event in vk_archive_group_bot_longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW \
             and str(event.message.get("peer_id")) == config.VK_USER_ID:
-            key = event.text
+            key = event.message["message"]
             break
 
     return captcha.try_again(key)
