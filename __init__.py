@@ -24,8 +24,10 @@ def captcha_handler(captcha):
     )
 
     key = ""
-    for event in VkBotLongPoll(vk_archive_group_api_session, config.VK_ARCHIVE_GROUP_ID).listen():
-        if event.type == VkBotEventType.MESSAGE_NEW and event.from_user == config.VK_USER_ID:
+    vk_archive_group_bot_longpoll = VkBotLongPoll(vk_archive_group_api_session, config.VK_ARCHIVE_GROUP_ID)
+    for event in vk_archive_group_bot_longpoll.listen():
+        if event.type == VkBotEventType.MESSAGE_NEW \
+            and event.from_user and str(event.user_id) == config.VK_USER_ID:
             key = event.text
             break
 
