@@ -13,6 +13,9 @@ def auth_handler():
     return pyotp.TOTP(config.VK_USER_2FA).now(), False
 
 
+vk_archive_group_api_session = VkApi(token=config.VK_ARCHIVE_GROUP_TOKEN)
+
+
 def captcha_handler(captcha):
     vk_archive_group_api_session.get_api().messages.send(
         message= "Требуется капча:\n" + f"{captcha.get_url()}",
@@ -43,7 +46,6 @@ vk_cred_session = VkApi(
 vk_cred_session.auth()
 vk_audio_session = VkAudio(vk_cred_session)
 
-vk_archive_group_api_session = VkApi(token=config.VK_ARCHIVE_GROUP_TOKEN)
 vk_main_group_api_session = VkApi(token=config.VK_MAIN_GROUP_TOKEN)
 
 vk_bot_longpoll = VkBotLongPoll(vk_main_group_api_session, config.VK_MAIN_GROUP_ID)
