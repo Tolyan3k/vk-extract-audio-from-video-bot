@@ -27,7 +27,7 @@ def captcha_handler(captcha):
     vk_archive_group_bot_longpoll = VkBotLongPoll(vk_archive_group_api_session, config.VK_ARCHIVE_GROUP_ID)
     for event in vk_archive_group_bot_longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW \
-            and str(event.user_id) == config.VK_USER_ID:
+            and str(event.message.get("peer_id")) == config.VK_USER_ID:
             key = event.text
             break
 
