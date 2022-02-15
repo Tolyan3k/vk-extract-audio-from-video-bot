@@ -307,7 +307,7 @@ class VkApi(object):
 
         if 'onLoginReCaptcha(' in response.text:
             print('#' * 30 + '\n' + '#' * 30)
-            pprint(response.raw)
+            pprint(json.load(response))
             print('#' * 30 + '\n' + '#' * 30)
 
             self.logger.info('Captcha code is required (recaptcha)')
@@ -324,7 +324,7 @@ class VkApi(object):
             self.logger.info('2FA is required')
 
             print('#' * 30 + '\n' + '#' * 30)
-            pprint(response.raw)
+            pprint(json.load(response))
             print('#' * 30 + '\n' + '#' * 30)
 
             response = self.http.get('https://vk.com/login?act=authcheck')
@@ -372,7 +372,7 @@ class VkApi(object):
         status = data['payload'][0]
 
         print('#' * 30 + '\n' + '#' * 30)
-        pprint(response.raw)
+        pprint(json.load(response))
         print('#' * 30 + '\n' + '#' * 30)
 
         if status == '4':  # OK
